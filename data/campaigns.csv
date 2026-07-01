@@ -1,0 +1,9 @@
+campaign_id,campaign_name,client,platform,start_date,end_date,budget
+1,Spring Launch IG,Nova Cosmetics,Instagram,2023-03-01,2023-03-31,3000.00
+2,Summer Heat TikTok,Nova Cosmetics,TikTok,2023-06-01,2023-06-30,4500.00
+3,Brand Awareness YT,Apex Sportswear,YouTube,2023-04-01,2023-04-30,6000.00
+4,Product Drop IG,Apex Sportswear,Instagram,2023-07-01,2023-07-31,3500.00
+5,Festival Promo TT,UrbanEats,TikTok,2023-05-01,2023-05-31,2500.00
+6,Relaunch Campaign YT,UrbanEats,YouTube,2023-08-01,2023-08-31,5000.00
+7,Back to School IG,Bright Academy,Instagram,2023-08-15,2023-09-15,2000.00
+8,Autumn Drive TT,Bright Academy,TikTok,2023-09-01,2023-09-30,3200.00
