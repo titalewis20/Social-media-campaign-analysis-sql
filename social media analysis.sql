@@ -1,6 +1,6 @@
 -- PROJECT: Social Media Campaign Performance Analysis
 -- Tool: PostgreSQL
--- Author: Lewis Brian
+-- Author: Tita Lewis
 -- Description: Campaign KPI analysis across Instagram, TikTok,
 --              and YouTube for a marketing agency with 4 clients.
 
