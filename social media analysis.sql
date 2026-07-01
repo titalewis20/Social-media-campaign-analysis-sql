@@ -1,18 +1,11 @@
--- ============================================================
 -- PROJECT: Social Media Campaign Performance Analysis
 -- Tool: PostgreSQL
 -- Author: Lewis Brian
 -- Description: Campaign KPI analysis across Instagram, TikTok,
 --              and YouTube for a marketing agency with 4 clients.
--- ============================================================
 
 
--- ============================================================
--- STEP 1: CREATE TABLES
--- ============================================================
--- campaigns holds the campaign-level info.
--- daily_metrics holds week-by-week performance numbers.
--- Import campaigns first, then daily_metrics.
+-- 1: CREATE TABLES
 
 CREATE TABLE campaigns (
     campaign_id   SERIAL PRIMARY KEY,
@@ -33,22 +26,15 @@ CREATE TABLE daily_metrics (
     engagements   INT,
     spend         NUMERIC(10, 2)
 );
-
-
 -- ============================================================
--- STEP 2: IMPORT DATA
--- ============================================================
--- Use pgAdmin: right-click each table → Import/Export Data
--- → choose the CSV → Header ON → OK.
---
+-- 2: IMPORT DATA
+
 -- Import order:
 --   1. campaigns.csv
 --   2. daily_metrics.csv
 
-
 -- ============================================================
--- STEP 3: EXPLORE THE DATA
--- ============================================================
+-- 3: EXPLORE THE DATA
 
 SELECT * FROM campaigns;
 SELECT * FROM daily_metrics LIMIT 10;
@@ -59,10 +45,8 @@ FROM daily_metrics
 GROUP BY campaign_id
 ORDER BY campaign_id;
 
-
 -- ============================================================
--- STEP 4: FULL CAMPAIGN PERFORMANCE SUMMARY
--- ============================================================
+-- 4: FULL CAMPAIGN PERFORMANCE SUMMARY
 -- Roll up all weekly records into one row per campaign.
 -- Shows total reach, engagement, clicks, and actual spend
 -- versus the planned budget.
@@ -84,10 +68,7 @@ ORDER BY total_impressions DESC;
 
 
 -- ============================================================
--- STEP 5: KEY MARKETING KPIs
--- ============================================================
--- Three standard metrics every marketing analyst should know:
---
+-- 5: KEY MARKETING KPIs
 --   CTR (Click-Through Rate): clicks / impressions × 100
 --   → What percentage of people who saw the ad clicked it?
 --
@@ -118,8 +99,7 @@ ORDER BY ctr_percent DESC;
 
 
 -- ============================================================
--- STEP 6: PLATFORM COMPARISON WITH IMPRESSION SHARE (CTE)
--- ============================================================
+-- 6: PLATFORM COMPARISON WITH IMPRESSION SHARE (CTE)
 -- First calculate totals per platform in the CTE,
 -- then use those totals to compute each platform's share
 -- of overall impressions. Doing this in two steps with a CTE
@@ -148,8 +128,7 @@ ORDER BY total_impressions DESC;
 
 
 -- ============================================================
--- STEP 7: RANK CAMPAIGNS WITHIN EACH PLATFORM
--- ============================================================
+-- 7: RANK CAMPAIGNS WITHIN EACH PLATFORM
 -- PARTITION BY platform means the ranking resets for each
 -- platform group independently. So TikTok has its own rank 1,
 -- Instagram has its own rank 1, and so on.
@@ -170,8 +149,7 @@ ORDER BY c.platform, platform_rank;
 
 
 -- ============================================================
--- STEP 8: PERFORMANCE LABELS (CASE WHEN)
--- ============================================================
+-- 8: PERFORMANCE LABELS (CASE WHEN)
 -- Automatically classify each campaign based on CTR.
 -- Benchmarks used: strong > 4%, average 2.5–4%, under 2.5% = review.
 -- This kind of segmentation is useful for executive dashboards.
@@ -192,8 +170,7 @@ ORDER BY ctr_percent DESC;
 
 
 -- ============================================================
--- STEP 9: WEEK-OVER-WEEK SPEND CHANGE (LAG)
--- ============================================================
+-- 9: WEEK-OVER-WEEK SPEND CHANGE (LAG)
 -- LAG() looks back at the previous row within a window.
 -- PARTITION BY campaign_id keeps each campaign's rows separate.
 -- ORDER BY metric_date ensures "previous" means the earlier date.
